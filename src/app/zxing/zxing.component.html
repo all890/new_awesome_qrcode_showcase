@@ -1,0 +1,6 @@
+
+<button (click)="startScan()">Start</button>
+<button (click)="stopScan()">Stop</button>
+<div style="width: 100%;">
+    <zxing-scanner #scanner (scanSuccess)="sendVal($event)"></zxing-scanner>
+</div>

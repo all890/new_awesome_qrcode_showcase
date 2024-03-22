@@ -1,0 +1,137 @@
+<h1>EasyQRJS Showcase</h1>
+<div #qrcode id="hi"></div>
+<form [formGroup]="qrCodePropForm">
+    <table>
+        <thead>
+            <th></th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>ทั่วไป : General</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>เนื้อหา : Text</label>
+                </td>
+                <td>
+                    <input formControlName="text" (keyup)="setQRCodeProperties()">
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ความกว้าง : Width</label>
+                </td>
+                <td>
+                    <input formControlName="width" type="range" min="0" max="500" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.width.value}} px
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ความสูง : Height</label>
+                </td>
+                <td>
+                    <input formControlName="height" type="range" min="0" max="500" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.height.value}} px
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ขนาดของจุด : Dot Scale</label>
+                </td>
+                <td>
+                    <input formControlName="dotScale" type="range" min="1" max="10" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.dotScale.value}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>พื้นหลัง : Background</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ความเข้มของภาพพื้นหลัง : Background Image Alpha</label>
+                </td>
+                <td>
+                    <input formControlName="bgImageAlpha" type="range" min="1" max="5" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.bgImageAlpha.value}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>โลโก้ : Logo</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ความกว้างของโลโก้ : Logo Width</label>
+                </td>
+                <td>
+                    <input formControlName="logoWidth" type="range" min="0" max="100" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.logoWidth.value}} px
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ความสูงของโลโก้ : Logo Height</label>
+                </td>
+                <td>
+                    <input formControlName="logoHeight" type="range" min="0" max="100" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.logoHeight.value}} px
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ให้โลโก้โปร่งใส : Logo Background Transparent</label>
+                </td>
+                <td>
+                    <input formControlName="bgImageTrans" type="checkbox" (change)="setQRCodeProperties()">
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>สี : Color</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>สีกรอบนอกของรหัสสี่เหลี่ยม : PO</label>
+                </td>
+                <td>
+                    <input formControlName="PO" type="color" (change)="setQRCodeProperties()">
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>สีกรอบในของรหัสสี่เหลี่ยม : PI</label>
+                </td>
+                <td>
+                    <input formControlName="PI" type="color" (change)="setQRCodeProperties()">
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</form>

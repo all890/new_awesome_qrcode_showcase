@@ -1,0 +1,249 @@
+<h1>NewAwesomeQRCode Showcase</h1>
+<div #canvas></div>
+<form [formGroup]="qrCodePropForm">
+    <table>
+        <thead>
+            <th></th>
+            <th></th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    <h3>ทั่วไป : General</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ขนาด : Size</label>
+                </td>
+                <td>
+                    <input formControlName="width" min="0" max="500" type="range" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.width.value}}px
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>เนื้อหา : Data</label>
+                </td>
+                <td>
+                    <input formControlName="data" (keyup)="setQRCodeProperties()">
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ระยะห่างของขอบ QRCode : QRCode Margin</label>
+                </td>
+                <td>
+                    <input formControlName="qrMargin" min="0" max="30" type="range" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.qrMargin.value}}px
+                </td>
+            </tr>
+            <!-- <tr>
+                <td>
+                    <label>เครื่องมือที่ใช้ในการวาด : Draw Types</label>
+                </td>
+                <td>
+                    <select formControlName="drawType" (change)="setQRCodeProperties()">
+                        <option value="canvas">canvas</option>
+                        <option value="svg">svg</option>
+                    </select>
+                </td>
+                <td>
+                    
+                </td>
+            </tr> -->
+            <tr>
+                <td colspan="3">
+                    <h3>โลโก้ : Logo (Default presets on this demo are recommended)</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ระยะห่างของขอบโลโก้ : Logo Margin</label>
+                </td>
+                <td>
+                    <input formControlName="logoMargin" min="0" max="20" type="range" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.logoMargin.value}}px
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ขนาดของโลโก้ : Logo Size</label>
+                </td>
+                <td>
+                    <input formControlName="logoSize" min="0" max="10" type="range" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.logoSize.value}}px
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>จุดภายใน QRCode : Dots</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>สีของจุด : Dot Color</label>
+                </td>
+                <td>
+                    <input formControlName="dotColor" type="color" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    *Black color is highest accuracy
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ประเภทของจุด : Dot Types</label>
+                </td>
+                <td>
+                    <select formControlName="dotType" (change)="setQRCodeProperties()">
+                        <option value="dots">แบบจุด (dots)</option>
+                        <option value="rounded">แบบโค้งมน (rounded)</option>
+                        <option value="classy">แบบใบไม้ (classy)</option>
+                        <option value="classy-rounded">แบบใบไม้มน (classy-rounded)</option>
+                        <option value="square">แบบเหลี่ยม (square)</option>
+                        <option value="extra-rounded">แบบโค้งมนมาก (extra-rounded)</option>
+                    </select>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>พื้นหลัง : Background</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ประเภทของพื้นหลัง : Background Types</label>
+                </td>
+                <td>
+                    <input type="radio" value="solidBg" name="bgType" formControlName="bgType" (change)="setQRCodeProperties()">
+                    <label>สีทึบ : Solid Color</label>
+                    <br>
+                    <input type="radio" value="imageBg" name="bgType" formControlName="bgType" (change)="setQRCodeProperties()">
+                    <label>รูปภาพ : Image</label>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr *ngIf="qrCodePropForm.controls.bgType.value == 'solidBg'">
+                <td>
+                    <label>สีของพื้นหลังสีทึบ : Solid Background Color</label>
+                </td>
+                <td>
+                    <input formControlName="solidBackgroundColor" type="color" (change)="setQRCodeProperties()">
+                </td>
+                <td></td>
+            </tr>
+            <tr *ngIf="qrCodePropForm.controls.bgType.value == 'imageBg'">
+                <td>
+                    <label>ความเข้มของภาพพื้นหลัง : Background Image Opacity</label>
+                </td>
+                <td>
+                    <input formControlName="backgroundImageOpacity" min="1" max="10" type="range" (change)="setQRCodeProperties()">
+                </td>
+                <td>
+                    {{qrCodePropForm.controls.backgroundImageOpacity.value}} *Should less than or equals 4
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>กรอบของสี่เหลี่ยมบน QRCode : Square Corner</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>สีของกรอบ : Square Corner Color</label>
+                </td>
+                <td>
+                    <input formControlName="cornerSquareColor" type="color" (change)="setQRCodeProperties()">
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ประเภทของกรอบ : Square Corner Types</label>
+                </td>
+                <td>
+                    <select formControlName="cornerSquareType" (change)="setQRCodeProperties()">
+                        <option value="dot">แบบจุด (dot)</option>
+                        <option value="square">แบบเหลี่ยม (square)</option>
+                        <option value="extra-rounded">แบบโค้งมนมาก (extra-rounded)</option>
+                    </select>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>จุดในกรอบของสี่เหลี่ยมบน QRCode : Corner Dot</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>สีของจุด : Corner Dot Color</label>
+                </td>
+                <td>
+                    <input formControlName="cornerDotColor" type="color" (change)="setQRCodeProperties()">
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>ประเภทของจุด : Corner Dot Types</label>
+                </td>
+                <td>
+                    <select formControlName="cornerDotType" (change)="setQRCodeProperties()">
+                        <option value="dot">แบบจุด (dot)</option>
+                        <option value="square">แบบเหลี่ยม (square)</option>
+                    </select>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <h3>นามสกุลของไฟล์ : Extension</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>นามสกุลของไฟล์รูปภาพ : Extension</label>
+                </td>
+                <td>
+                    <select formControlName="extension" (change)="setQRCodeProperties()">
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                    </select>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button (click)="onDownloadClick()">ดาวน์โหลดรูป QRCode</button>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
