@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import  QRCodeStyling, { CornerDotType, CornerSquareType, DotType, DrawType, Extension } from 'new-awesome-qrcode'
+import  QRCodeStyling, { CornerDotType, CornerSquareType, DotType, Extension } from 'new-awesome-qrcode'
 
 @Component({
   selector: 'app-qr-code-style',
